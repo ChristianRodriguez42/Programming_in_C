@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h>
+#define OT_HOURS 40
+#define BASE_PAY_RATE 10.00
+#define OVERTIME 1.5
+int main(void)
+{
+	float taxRate[3] = { .25,.20,.15 };
+	float taxLevels[3] = { 450,300,0 };
+	float hours, pay = 0;
+	printf("how many hours have you worked?\n");
+	scanf("%f", &hours);
+	if (hours > OT_HOURS) 
+	{
+		pay = (OT_HOURS * BASE_PAY_RATE) + ((hours - OT_HOURS) * 15);
+	}
+	else
+	{
+		pay = hours * BASE_PAY_RATE;
+	}
+	
+	float grossPay = pay;
+	float holdPay = grossPay;
+	float taxAmount = 0;
+
+	/*if (holdPay > 450)
+	{
+		taxAmount = taxAmount + (holdPay - 450) * .25;
+		holdPay = holdPay - (holdPay - 450);
+	}
+	if (holdPay > 300)
+	{
+		taxAmount = taxAmount + (holdPay - 300) * .20;
+		holdPay = holdPay - 150;
+	}
+	taxAmount = taxAmount + holdPay * .15;
+	*/
+	for (int i = 0; i < 3; i++)
+	{
+		if (holdPay > taxLevels[i])
+		{
+			taxAmount = taxAmount + (holdPay - taxLevels[i])* taxRate[i];
+			holdPay = holdPay - (holdPay - taxLevels[i]);
+		}
+
+	}
+	
+	printf("Hours = %.2f\nGross Pay = %.2f\n", hours, grossPay);
+	printf("Tax amount = %.2f\nTotal pay = %.2f", taxAmount, grossPay - taxAmount);
+	//printf("\nyour pay = %f", pay);
+	getchar();
+	getchar();
+	return 0;
+}
