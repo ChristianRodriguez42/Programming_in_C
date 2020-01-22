@@ -1,0 +1,16 @@
+/* escape.c -- uses escape characters */
+#include <stdio.h>
+int main(void)
+{
+	float cups = 0;
+	float pintsPerCup = 0.5;
+	float tablespoonsPerCup = 16, teaspoonsPerCup = 48, ouncesPerCup = 8;
+	printf("How many Cups You Got Bro?");
+	scanf_s("%f", &cups);
+	printf("Dude %.1f Cups if %.1f Pints, %.1f Tablespoons, %.1f Teaspoons and %.1f ounces",
+		cups, pintsPerCup * cups, tablespoonsPerCup * cups, teaspoonsPerCup * cups, ouncesPerCup * cups);
+	printf("\nRad!!");
+	getchar();
+	getchar();
+	return 0;
+}
