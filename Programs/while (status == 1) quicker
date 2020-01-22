@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+	int status;
+	long num;
+	while (scanf_s("%ld", &num) == 1)
+	{
+		
+		printf("The number is %ld\n", num);
+	}
+	getchar();
+	return 0;
+}
