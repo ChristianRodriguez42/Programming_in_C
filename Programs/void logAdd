@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h> 
+
+void logAdd(double pNum1, double pNum2);
+int main(void)
+{
+	double number1 = 0.0, number2 = 0.0;
+	printf("Enter two numbers to show how long work");
+	scanf_s("%lf%lf", &number1, &number2);
+	logAdd(number1, number2);
+	printf("GoodBye");
+	getchar();
+	getchar();
+
+}
+void logAdd(double pNum1, double pNum2)
+{
+	double log1, log2, logAdd;
+	log1 = log10(pNum1);
+	log2 = log10(pNum2);
+	printf("%f time %f is %f\n", pNum1, pNum2, pNum1 * pNum2);
+	logAdd = log1 + log2;
+	printf("log10(%f) + log10(%f) isd %f\n", pNum1, pNum2, logAdd);
+	printf("10 to the power of %f is %f \n\n", logAdd, pow(10, logAdd));
+}
