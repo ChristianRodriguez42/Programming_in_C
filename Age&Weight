@@ -1,0 +1,11 @@
+#include <stdio.h>
+int main(void)
+{                                              //A wonderful program
+	int age;                                  //This is my age
+	int weight;                              //This is my weight 
+	age = 24;
+	weight = 120;
+	printf("My name is Christian Rodriguez\nI am %d years old \nMy weight is %d pounds.", age, weight);
+	getchar();
+	return 0;
+}
