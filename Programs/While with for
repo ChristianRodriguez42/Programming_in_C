@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+	printf("enter a number or q to quit: ");
+	int aNumber;
+	int goodRead;
+
+	goodRead = scanf_s("%d", &aNumber);
+	while (goodRead == 1)
+	{
+		int sum = aNumber;
+		for (int add = 1; add < aNumber; add++)
+		{
+			sum = sum + add;
+		}
+		printf("The sum of the number below %d is %d\n", aNumber, sum);
+		printf("enter a number or q to quit: ");
+		goodRead = scanf_s("%d", &aNumber);
+	}
+	getchar();
+	return 0;
+}
