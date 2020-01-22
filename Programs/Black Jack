@@ -1,0 +1,247 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+#include <conio.h>
+#define CARDS_IN_DECK 52
+#define SUITS_IN_DECK 4
+#define FACES_IN_DECK 13
+
+int gCardsLeft = CARDS_IN_DECK; // Global Variable that holds the number of cards left in the deck
+struct gCard // The basic definition of a card
+{
+	char suit[10];
+	char face[10];
+	int value;
+};
+struct gCard gDeck[CARDS_IN_DECK]; // Our deck of cards THAT HAS 52 CARDS
+
+struct gCard deal(); // The function that deals our cards
+void paintDeck(); // The function that paints our cards and gives them initial values
+void printDeck(); // Prints out entire deck
+void dealDeck(); // Deals random cards from the deck until the player says stop
+void shuffle(); // Resets our cardsLeft back to 52
+char playAgain();
+
+int main(void) // Our main routine   ***********************************************************
+{
+
+	int bank = 100, bet = 0;
+	int playerTotal, dealerTotal;
+	struct gCard dealerHand[10];
+	struct gCard playerHand[10];
+	int playerIndex = 0, dealerIndex = 0;
+	char check;
+	srand(time(NULL)); // Give the random generator the seed of time
+	paintDeck();
+	//printDeck();
+	//dealDeck();
+
+	check = playAgain();
+	while (check == 'Y' && bank > 0)
+	{
+		printf("You got $%d money in the bank\n", bank);
+		printf("How much would you like to bet?");
+		scanf("%d", &bet);
+		getchar();
+		playerIndex = 2;
+		dealerIndex = 2;
+
+		while (bank < bet || bet < 1)
+		{
+			printf("How much would you like to bet?");
+			scanf("%d", &bet);
+			getchar();
+		}
+		bank = bank - bet;
+
+		playerHand[0] = deal();
+		dealerHand[0] = deal();
+
+		playerHand[1] = deal();
+		dealerHand[1] = deal();
+
+		playerTotal = playerHand[0].value + playerHand[1].value;
+		dealerTotal = dealerHand[0].value + dealerHand[1].value;
+				
+		system("cls");
+		printf("Players Cards:\n\t%s of %s \n\t%s of %s\n", playerHand[0].face,playerHand[0].suit, playerHand[1].face, playerHand[1].suit);
+		printf("Dealers Cards:\n\t%s of %s \n\t??? of ???\n", dealerHand[0].face, dealerHand[0].suit);
+
+		//playerTotal = 21;
+		//dealerTotal = 20;
+
+		if (playerTotal == 21)
+		{
+			if (dealerTotal == 21)
+			{
+				bank = bank + bet;
+				printf("\nIts a draw! I had 21 too..\n");
+				check = playAgain();
+				continue;
+			}
+			else
+			{
+				bank = bank + (2.5 * bet);
+				printf("\nBlack Jack!! You Win!!\n");
+				check = playAgain();
+				continue;
+			}
+
+		}
+
+		if (dealerTotal == 21)
+		{
+			
+			printf("\nSorry you Lose\n");
+			check = playAgain();
+			continue;
+		}
+		char hitStand;
+		printf("Do you want to hit or stand? H/S\n");
+		scanf("%c", &hitStand);
+		getchar();
+
+		while (hitStand == 'H')
+		{
+			playerHand[playerIndex] = deal();
+			printf("\n\t%s of %s \n", playerHand[playerIndex].face, playerHand[playerIndex].suit);
+			playerTotal = playerTotal + playerHand[playerIndex].value;
+			if (playerTotal > 21)
+			{
+				printf("\nSorry you Lose\n");
+				check = playAgain();
+				continue;
+			}
+			printf("Do you want to hit or stand? H/S\n");
+			scanf("%c", &hitStand);
+			getchar();
+			playerIndex = playerIndex + 1;
+		}
+		if (playerTotal > 21)
+		{
+			printf("\nYou lose! loser!");
+			check = playAgain();
+			continue;
+		}
+		
+		printf("Dealers Cards:\n\t%s of %s \n\t%s of %s\n", dealerHand[0].face, dealerHand[0].suit, dealerHand[1].face, dealerHand[1].suit);
+		while (dealerTotal < 17)
+		{
+			dealerHand[dealerIndex] = deal();
+			printf("\n\t%s of %s \n", dealerHand[dealerIndex].face, dealerHand[dealerIndex].suit);
+			dealerTotal = dealerTotal + dealerHand[dealerIndex].value;
+			dealerIndex = dealerIndex + 1;
+
+		}
+
+		if (dealerTotal > 21)
+		{
+			bank = bank + (bet * 2);
+			printf("Dealer bust! You Win\n");
+			check = playAgain();
+			continue;
+		}
+
+		if (playerTotal > dealerTotal)
+		{
+			bank = bank + (bet * 2);
+			printf("You have higher cards! You Win\n");
+			
+		}
+		else if (playerTotal == dealerTotal)
+		{
+			bank = bank + bet;
+			printf("\nIts a draw! Get your bet back.\n");
+			
+		}
+		else
+		{
+			printf("You lose! tough luck\n");
+		}
+		
+
+		check = playAgain();
+
+	}
+	getchar();
+
+	return 0;
+}
+char playAgain()
+{
+	char check;
+	printf("Do you want to play Black Jack?\n Y/N:");
+	scanf("%c", &check);
+	getchar();
+	system("cls");
+	return check;
+}
+
+struct gCard deal() // This routine randomly deals the cards
+{
+	if (gCardsLeft > 0) // Are there any cards left?
+	{
+		int pickedCardIndex = rand() % gCardsLeft;
+
+		struct gCard pickedCard = gDeck[pickedCardIndex];
+		gCardsLeft = gCardsLeft - 1;
+		if (gCardsLeft > 0) // Was that the last cards 
+		{
+			struct gCard hold = gDeck[gCardsLeft];  //Nope - swap them
+			gDeck[gCardsLeft] = gDeck[pickedCardIndex];
+			gDeck[pickedCardIndex] = hold;
+		}
+		return pickedCard;  // Send the card back
+	}
+	else // We're out of cards - why are you calling me??
+	{
+		printf("\n No More Cards - Ending Program!!");
+		exit(1);
+	}
+}
+void paintDeck() // This routine initializes our deck of cards for use by BlackJack
+{
+	char suits[SUITS_IN_DECK][10] = { { "Spades" },{ "Hearts" } ,{ "Diamonds" },{ "Clubs" } };
+	char faces[FACES_IN_DECK][10] = { { "Ace" } ,{ "Deuce" } ,{ "Three" },{ "Four" },{ "Five" },{ "Six" },{ "Seven" },
+	{ "Eight" },{ "Nine" },{ "Ten" },{ "Jack" },{ "Queen" } ,{ "King" } };
+	int values[FACES_IN_DECK] = { 11,2,3,4,5,6,7,8,9,10,10,10,10 };
+
+	for (int suit = 0; suit < SUITS_IN_DECK; suit++)
+	{
+		for (int face = 0; face < FACES_IN_DECK; face++)
+		{
+			int index = FACES_IN_DECK * suit + face;
+			strcpy(gDeck[index].suit, suits[suit]);
+			strcpy(gDeck[index].face, faces[face]);
+			gDeck[index].value = values[face];
+		}
+	}
+}
+void printDeck() // This routine prints out our entire deck 
+{
+	for (int card = 0; card < CARDS_IN_DECK; card++)
+	{
+		printf("%s of %s valule is %d\n", gDeck[card].face, gDeck[card].suit, gDeck[card].value);
+	}
+}
+void dealDeck() // This routine draws random cards and prints them out
+{
+	char continues = 'Y';
+	while (continues == 'Y' && gCardsLeft > 0)
+	{
+		struct gCard myCard = deal();
+		printf("%s of %s value is %d\n", myCard.face, myCard.suit, myCard.value);
+		scanf("%c", &continues); // We'll continue on as long as a 'Y' is entered
+		getchar();
+	}
+	if (gCardsLeft == 0)
+	{
+		printf("\nYou're out of cards!!");
+	}
+}
+void shuffle()
+{
+	gCardsLeft = CARDS_IN_DECK;
+}
