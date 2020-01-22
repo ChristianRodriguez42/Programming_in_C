@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	int month[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+	printf("give me a day between 1 - 365");
+	int julian;
+	scanf("%d", &julian);
+
+	while (julian < 0 || julian > 365)
+	{
+		printf("Between 1 and 365!!");
+		scanf("%d", &julian);
+	}
+
+
+	int addEmUp = 0;
+	int index = 0;
+	while (julian > addEmUp)
+	{
+		addEmUp = addEmUp + month[index];  
+		index = index + 1;
+	}
+
+	int myDay = julian - (addEmUp - month[index - 1]);
+	printf("The date is %d/%d", index, myDay);
+
+	getchar();
+	getchar();
+	return 0;
+
+}
