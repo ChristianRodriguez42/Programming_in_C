@@ -1,0 +1,66 @@
+#include <stdio.h>
+int main()
+{
+	int numberGrade;
+	printf("what score did you get on your test");
+	scanf("%d", &numberGrade);
+	char letterGrade = ' ';
+	switch (numberGrade/10)
+	{
+	case 0: letterGrade = 'F';
+		break;
+	case 1: letterGrade = 'F';
+		break;
+	case 2: letterGrade = 'F';
+		break;
+	case 3: letterGrade = 'F';
+		break;
+	case 4: letterGrade = 'F';
+		break;
+	case 5: letterGrade = 'F';
+		break;
+	case 6: letterGrade = 'D';
+		break;
+	case 7: letterGrade = 'C';
+		break;
+	case 8: letterGrade = 'B';
+		break;
+	default: letterGrade = 'A';
+	}
+	printf("\nThen your letter grade was %c", letterGrade);
+	getchar();
+	getchar();
+	return 0;
+}
+
+OR
+
+#include <stdio.h>
+int main()
+{
+	int numberGrade;
+	printf("what score did you get on your test");
+	scanf("%d", &numberGrade);
+	char letterGrade = 'F';
+	switch (numberGrade/10)
+	{
+	case 0:
+	case 1: 
+	case 2: 
+	case 3: 
+	case 4: 
+	case 5: letterGrade = 'F';
+		break;
+	case 6: letterGrade = 'D';
+		break;
+	case 7: letterGrade = 'C';
+		break;
+	case 8: letterGrade = 'B';
+		break;
+	default: letterGrade = 'A';
+	}
+	printf("\nThen your letter grade was %c", letterGrade);
+	getchar();
+	getchar();
+	return 0;
+}
