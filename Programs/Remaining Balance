@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+int main(void)
+{
+	double  borrowedAmount, interestRate, numberYear;
+	printf("Enter amount, rate, and year: ");
+	scanf("%lf%lf%lf", &borrowedAmount, &interestRate, &numberYear);
+	double payment;
+	payment = (borrowedAmount * (interestRate * pow((1.0 + interestRate), numberYear))) / (pow((1.0 + interestRate), numberYear) - 1);
+	printf("\n The Payment is %.2lf\n", payment);
+	double remainingBalance = borrowedAmount;
+	int year = 1;
+	printf("year     Principale     Intrest        Remaining    \n");
+	while (remainingBalance > 0)
+	{
+		float intrestAmount = remainingBalance * interestRate;
+		float principalPayment = payment - intrestAmount;
+		remainingBalance = remainingBalance - principalPayment;
+		printf("%4d%15.2lf%15.2lf%15.2lf\n", year, principalPayment, intrestAmount, remainingBalance);
+		year = year + 1;	
+	}
+	getchar();
+	getchar();
+	return 0;
+}
