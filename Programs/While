@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	int counter = 0;
+	while (counter < 21)
+	{
+		printf("%d\n", counter++);       // the ++ adds the variable and increments it
+		//counter++;
+	}                                 // taking this curly brace off just runs 1 line for the while
+
+	getchar();
+	getchar();
+	return 0;
+}
