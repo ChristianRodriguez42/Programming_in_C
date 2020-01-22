@@ -1,0 +1,11 @@
+int main(void) {
+float number1 = .6;
+int number2 = 2;
+int results = 0;
+char stuff = 'A';
+float resultsf = 0.0;
+results = number1 + number2;
+resultsf = number1 + number2;
+printf("results = %d while resultsf = %f",results,resultsf);
+getchar();
+}
