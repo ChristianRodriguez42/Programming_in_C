@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+int main(void)
+{
+	int stopit = 1;
+	while (stopit == 1)
+	{	
+		printf("%d\n", stopit == 1);
+		printf("stop it\n");
+		stopit = 2;
+	}
+	printf("After loop %d", stopit == 1);
+		getchar();
+		return 0;
+}
