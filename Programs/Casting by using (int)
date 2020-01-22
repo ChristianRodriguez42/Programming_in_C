@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	float number1 = .6;
+	int number2 = 2;
+	int results = 0;
+	float resultsf = 0.0;
+	results = number1 + number2;           //float gets turned into an int so it gets trunkated
+	resultsf = (int)number1 + number2;         //Casting by using (int) infront makes variable into that data type. resultsf = results float
+	printf("results = %d while resultsf = %f", results, resultsf);
+	getchar();
+}
