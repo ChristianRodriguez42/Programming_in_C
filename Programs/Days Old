@@ -1,0 +1,22 @@
+#include <stdio.h>
+int main(void)
+{
+	int age;
+	int day;
+	age = 24;
+	day = age * 365;
+	printf("I am %d years old.\nThat is %d days old", age, day);
+	getchar();
+	return 0;
+}
+
+or
+
+#include <stdio.h>
+int main(void)
+{
+	int age = 63, daysPerYear = 365;	
+	printf("I am %d years old.", age * daysPerYear);
+	getchar();
+	return 0;
+}
