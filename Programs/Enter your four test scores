@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+	int test1, test2, test3, test4;
+	float average;
+	printf("Enter your four test scores...");
+	scanf("%d%d%d%d", &test1, &test2, &test3, &test4);
+	float sum = test1 + test2 + test3 + test4;
+	average = sum / 4;
+	printf("The four scores were %d, %d, %d, and %d\n", test1, test2, test3, test4);
+	printf("Their average is %f", average);
+	getchar();
+	getchar();
+	return 0;
+}
+
+Better
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#define SCORES 4
+int main(void)
+{
+	int test[SCORES];
+	float average;
+	printf("Enter your four test scores...");
+	float sum = 0.0;
+	for (int i = 0; i < SCORES; i++)
+	{
+		scanf("%d", &test[i]);
+		sum = sum + test[i];
+	}
+	average = sum / SCORES;
+	printf("The %d scores were ", SCORES);
+	for (int i = 0; i < SCORES; i++)
+	{
+		printf("%d", test[i]);
+	}
+	printf("\nTheir average is %f", average);
+	getchar();
+	getchar();
+	return 0;
+}
