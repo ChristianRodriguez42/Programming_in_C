@@ -1,0 +1,117 @@
+#include <stdio.h>
+void loadItem();
+struct menu
+{
+	char itemName[20];
+	float price;
+	int purchased;
+};
+struct menu allShrimp[10];
+int main()
+{
+	
+	
+	printf("Welcome to Bradley's Shrimp House\nHere's Our Menu:\n");
+	loadItem();
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%3d ", i);
+		printf("%s", allShrimp[i].itemName);
+		printf(" %5.2f\n", allShrimp[i].price);
+	}
+	int orderItem = 0;
+	int numberItems = 0;
+	float totalBill = 0, taxAmount = 0;
+	const float TAXPERCENT = .07;
+	printf("\nEnter your item number: ");
+	while (scanf_s("%ld", &orderItem) == 1)
+	{
+		if (orderItem < 0)
+		{
+			break;
+		}
+		if (orderItem > 9)
+		{
+			break;
+		}
+		printf("Good Choice...How Many? ");
+		if (scanf("%ld", &numberItems) == 1)
+		{
+			allShrimp[orderItem].purchased = allShrimp[orderItem].purchased + numberItems;
+
+		}
+		else
+		{
+			break;
+		}
+		printf("Enter your next item number or Q to quit: ");
+	}
+
+	printf("\nYou Orderd:\n");
+	for (int i = 0; i < 10; i++)
+	{
+		if (allShrimp[i].purchased > 0)
+		{
+			printf("%d ", allShrimp[i].purchased);
+			printf("%s", allShrimp[i].itemName);
+			
+			printf(" at %.2f = %.2f\n", allShrimp[i].price, allShrimp[i].price * allShrimp[i].purchased);
+			totalBill = totalBill + allShrimp[i].price * allShrimp[i].purchased;
+		}
+	}
+	printf("\nYour Bill Before Tax is: %7.2f\n", totalBill);
+	taxAmount = totalBill * TAXPERCENT;
+	printf("The tax amount is:       %7.2f\n", taxAmount);
+	printf("Your Total Bill is:      %7.2f\n\n", taxAmount + totalBill);
+	printf("We hope you enjoyed your shrimp\nCome back again real soon!!");
+	getchar();
+	return 0;
+
+
+
+
+}
+void loadItem()
+{
+	
+	for (int pItem = 0; pItem < 10; pItem++)
+	{
+		allShrimp[pItem].purchased = 0;
+		switch (pItem)
+		{
+		case 0: strcpy(allShrimp[pItem].itemName, "Steamed Shrimp     ");
+			allShrimp[pItem].price = 5.45;
+			break;
+		case 1: strcpy(allShrimp[pItem].itemName, "Boiled Shrimp      ");
+			allShrimp[pItem].price = 9.99;
+			break;
+		case 2: strcpy(allShrimp[pItem].itemName, "Fried Shrimp       ");
+			allShrimp[pItem].price = 8.90;
+			break;
+		case 3: strcpy(allShrimp[pItem].itemName, "Popcorn Shrimp     ");
+			allShrimp[pItem].price = 6.75;
+			break;
+		case 4: strcpy(allShrimp[pItem].itemName, "Jumbo Shrimp       ");
+			allShrimp[pItem].price = 10.90;
+			break;
+		case 5: strcpy(allShrimp[pItem].itemName, "Grilled Shrimp     ");
+			allShrimp[pItem].price = 7.75;
+			break;
+		case 6: strcpy(allShrimp[pItem].itemName, "BBQ Shrimp         ");
+			allShrimp[pItem].price = 8.76;
+			break;
+		case 7: strcpy(allShrimp[pItem].itemName, "Cajun Shrimp       ");
+			allShrimp[pItem].price = 7.45;
+			break;
+		case 8: strcpy(allShrimp[pItem].itemName, "Coconut Shrimp     ");
+			allShrimp[pItem].price = 10.34;
+			break;
+		case 9: strcpy(allShrimp[pItem].itemName, "Stir - Fried Shrimp");
+			allShrimp[pItem].price = 7.45;
+			break;
+		default: strcpy(allShrimp[pItem].itemName, "Bad Shrimp");
+			allShrimp[pItem].price = 0.0;
+		}
+	}
+	
+}
