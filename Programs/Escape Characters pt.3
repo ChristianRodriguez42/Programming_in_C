@@ -1,0 +1,16 @@
+/* escape.c -- uses escape characters */
+#include <stdio.h>
+int main(void)
+{
+	float pintOfPaint = 100;
+	float roomLength = 0, roomHeight = 0, roomWidth = 0;
+	float area = 0, pints = 0;
+	printf("Enter the rooms length, height, and width separated by spaces");
+	scanf_s("%f%f%f", &roomLength, &roomHeight, &roomWidth);
+	area = roomLength * roomHeight * 2 + roomWidth * roomHeight * 2 + roomLength * roomWidth;
+	pints = area / pintOfPaint;
+	printf("Lowes Paint Calculator\nFor length %.2f, width %.2f, height %.2f you need %.2f pints of paint", roomLength, roomWidth, roomHeight, pints);
+	getchar();
+	getchar();
+	return 0;
+}
