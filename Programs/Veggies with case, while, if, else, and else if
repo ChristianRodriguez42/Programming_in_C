@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <string.h>
+void printVeggieName(int veggie);
+int main()
+{
+	float veggiePrice[3] = { 2.05,1.15,1.00 };
+	int veggieCount[3] = { 0,0,0 };
+	char veggie;
+
+	printf("enter a  for artichokes, b for beets, c for carrots or q to quit");
+	scanf("%c", &veggie);
+
+	while (veggie != 'q')
+	{
+		int index;
+		char veggieName[11];
+		switch (veggie)
+		{
+		case 'a':
+			index = 0;
+			strcpy(veggieName, "artichokes");
+			break;
+		case 'b':
+			index = 1;
+			strcpy(veggieName, "beets");
+			break;
+		case 'c':
+			index = 2;
+			strcpy(veggieName, "carrots");
+			break;
+		default:
+			printf("\nInvalid input stupid. a b or c");
+			index = -1;
+		}
+		if (index >= 0)
+		{
+			printf("\nhow many pounds of %s do you want?", veggieName);
+			int pounds;
+			scanf("%d", &pounds);
+			veggieCount[index] = veggieCount[index] + pounds;
+		}
+		printf("enter a  for artichokes, b for beets, c for carrots or q to quit");
+		getchar();
+		scanf("%c", &veggie);
+	}
+	float totalPrice = 0;
+	int totalWeight = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		printf("\n%d , %d", i, veggieCount[i]);
+		totalPrice = totalPrice + (veggiePrice[i] * veggieCount[i]);
+		totalWeight = totalWeight + veggieCount[i];
+	}
+
+	float discount = 0;
+	if (totalPrice >= 100.00)
+	{
+
+	}
+
+	float shipping = 0;
+	if (totalWeight <= 5)
+	{
+		shipping = 6.50;
+	}
+	else if (totalWeight < 20)
+	{
+		shipping = 14.00;
+	}
+	else
+	{
+		shipping = 14.00 + (totalWeight * .5);
+	}
+
+
+	for (int i = 0; i < 3; i++)
+	{
+		printf("\n");
+		printVeggieName(i);
+		printf("%7.2f,%7.2d,%7.2f", veggiePrice[i], veggieCount[i], veggieCount[i] * veggiePrice[i]);
+	}
+
+	getchar();
+	getchar();
+	return 0;
+}
+void printVeggieName(int veggie)
+{
+	switch (veggie)
+	{
+	case 0: printf("artichokes");
+		break;
+	case 1:printf("beets    ");
+		break;
+	case 2:printf("carrots    ");
+		break;
+	default: printf("crap   ");
+	}
+}
