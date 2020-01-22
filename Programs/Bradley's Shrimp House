@@ -1,0 +1,147 @@
+#include <stdio.h>
+#include <string.h>
+#define TAX_RATE .07
+void printItemName(int itemName);
+int main()
+{
+	float menuPrices[10] = { 5.45, 9.99, 8.90, 6.75, 10.90, 7.75, 8.76, 7.45, 10.34, 7.45};
+	int itemsPurchased[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	int itemName;
+
+	printf("Welcome to Bradley's Shrimp House\nHere is our menu:");
+	for (int i = 0; i < 10; i++)
+	{
+		printf("\n   %d \t\t ", i);
+		printItemName(i);
+		printf(" shrimp");
+		printf("\t\t\t %-5.2f", menuPrices[i]);
+	}
+
+	printf("\n\nEnter your item number:");
+	scanf_s("%d", &itemName);
+
+	while (itemName != 999)
+	{
+		int index;
+		char foodName[20];
+		switch (itemName)
+		{
+		case 0:
+			index = 0;
+			strcpy(foodName, "Steamed");
+			break;
+		case 1:
+			index = 1;
+			strcpy(foodName, "Boiled");
+			break;
+		case 2:
+			index = 2;
+			strcpy(foodName, "Fried");
+			break;
+		case 3:
+			index = 3;
+			strcpy(foodName, "Popcorn");
+			break;
+		case 4:
+			index = 4;
+			strcpy(foodName, "Jumbo");
+			break;
+		case 5:
+			index = 5;
+			strcpy(foodName, "Grilled");
+			break;
+		case 6:
+			index = 6;
+			strcpy(foodName, "BBQ");
+			break;
+		case 7:
+			index = 7;
+			strcpy(foodName, "Cajun");
+			break;
+		case 8:
+			index = 8;
+			strcpy(foodName, "Coconut");
+			break;
+		case 9:
+			index = 9;
+			strcpy(foodName, "Stir-Fried");
+			break;
+		default:
+			printf("Bad Shrimp\n");
+			index = -1;
+		}
+		if (index >= 0)
+		{
+			printf("\n how many %s shrimp do you want?", foodName);
+			float quantity;
+			scanf_s("%f", &quantity);
+			itemsPurchased[index] = itemsPurchased[index] + quantity;
+		}
+		printf("Enter your next item number or 999 to quit");
+		getchar();
+		scanf_s("%d", &itemName);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		printf("\n\n");
+		printItemName(i);
+		printf(" shrimp %d, %.2f", itemsPurchased[i], ((float)menuPrices[i] * (float)itemsPurchased[i]));
+	}
+	float totalPrice = 0, pricePlusTax = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if (itemsPurchased[i] != 0)
+		{
+			printf("\n%d ", itemsPurchased[i]);
+			printItemName(i);
+			printf(" shrimp  at  %.2f = %.2f", menuPrices[i], ((float)menuPrices[i] * (float)itemsPurchased[i]));
+		}
+		totalPrice = totalPrice + (menuPrices[i] * itemsPurchased[i]);
+	}
+	pricePlusTax = totalPrice + (TAX_RATE * totalPrice);
+
+	printf("\nthis is your total price with tax :%.2f", pricePlusTax);
+	getchar();
+	getchar();
+	return 0;
+}
+
+void printItemName(int itemName)
+{
+	switch (itemName)
+	{
+	case 0:
+		printf("Steamed");
+		break;
+	case 1:
+		printf("Boiled");
+		break;
+	case 2:
+		printf("Fried");
+		break;
+	case 3:
+		printf("Popcorn");
+		break;
+	case 4:
+		printf("Jumbo");
+		break;
+	case 5:
+		printf("Grilled");
+		break;
+	case 6:
+		printf("BBQ");
+		break;
+	case 7:
+		printf("Cajun");
+		break;
+	case 8:
+		printf("Coconut");
+		break;
+	case 9:
+		printf("Stir-Fried");
+		break;
+	default:
+		printf("Bad Shrimp\n");
+
+	}
+}
