@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h>
+/*Modify the above so that it can be used by the person at the exit
+gate of a garage to determine how much a person owes for staying in the garage.
+The garage charges $20 a day, $1 an hour and 3 cents a minute.
+We don’t know how to do this correctly yet,
+so let’s over-charge our customers in certain situations.
+Even though we shouldn’t, let’s use floats.
+
+*/
+/* pound.c -- defines a function with an argument   */
+#define HOURS_PER_DAY 24
+#define MINUTES_PER_HOUR 60
+int main(void)
+{
+	const float PER_DAY = 20.0;
+	const float PER_HOUR = 1.0;
+	const float PER_MINUTE = .03;
+	int minutes, days, hours, remainder;
+	printf("How many minutes you say? ");
+	scanf("%d", &minutes);
+	days = minutes / (HOURS_PER_DAY * MINUTES_PER_HOUR);
+	remainder = minutes % (HOURS_PER_DAY * MINUTES_PER_HOUR);
+	printf("%d\n", remainder);
+	hours = remainder / MINUTES_PER_HOUR;
+	remainder = remainder % MINUTES_PER_HOUR;
+	printf("%d minutes is %d days, %d hours and %d minutes\n", minutes, days, hours, remainder);
+	if (remainder > 33)
+	{
+		hours = hours + 1;
+		remainder = 0;
+	}
+	if (hours > 19)
+	{
+		days = days + 1;
+		hours = 0;
+	}
+	printf("%d minutes is %d days, %d hours and %d minutes\n", minutes, days, hours, remainder);
+	float garageCharge = (PER_DAY * days) + (PER_HOUR * hours) + (PER_MINUTE * remainder);
+	printf("That will be $%.2f", garageCharge);
+
+
+	getchar();
+	getchar();
+
+}
