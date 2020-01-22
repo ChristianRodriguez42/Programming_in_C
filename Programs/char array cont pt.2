@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	char name[40];
+	char snum[5];
+	printf("Hey dude whats your name?");
+	scanf("%s", name);
+	int numbChars = strlen(name) + 3;
+	sprintf(snum, "%d", numbChars);
+	char sFormat[100];
+	strcpy(sFormat, "Your name is *%-");
+	strcat(sFormat, snum);
+	strcat(sFormat, "s*");
+	printf("%s\n", sFormat);
+	printf(sFormat, name);
+	printf("Your name is %-20s", name);
+	getchar();
+	getchar();
+	return 0;
+}
