@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <string.h>
+#define PI 3.14159
+int main()
+{
+	const double FEET_IN_A_METERS = 3.28084;
+	float meters;
+	printf("How long is the soccer feild?");
+	scanf_s("%f", &meters);
+	printf("That would be %f feet in the good ole USA", meters * FEET_IN_A_METERS);
+
+	getchar();
+	getchar();
+	return 0;
+
+}
