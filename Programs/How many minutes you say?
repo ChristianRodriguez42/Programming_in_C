@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+#define HOURS_PER_DAY 24
+#define MINUTES_PER_HOUR 60
+int main(void)
+{
+	const float PER_DAY = 20.0;
+	const float PER_HOUR = 1.0;
+	const float PER_MINUTE = .03;
+	int minutes, days, hours, remainder;
+
+	printf("How many minutes you say?");
+	scanf_s("%d", &minutes);
+	days = minutes / (HOURS_PER_DAY * MINUTES_PER_HOUR);
+	remainder = minutes % (HOURS_PER_DAY * MINUTES_PER_HOUR);  // % after minutes finds the remainder
+	printf("%d\n", remainder);
+	hours = remainder / MINUTES_PER_HOUR;
+	remainder = remainder % MINUTES_PER_HOUR;
+	printf("%d minutes is %d days, %d hours and %d minutes", minutes, days, hours, remainder);
+
+	float garageCharge = (PER_DAY * days) + (PER_HOUR * hours) + (PER_MINUTE * remainder);
+	printf("That will be $%.2f", garageCharge);
+
+	getchar();
+	getchar();
+	return 0;
+}
