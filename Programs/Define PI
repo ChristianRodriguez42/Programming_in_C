@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <string.h>
+#define PI 3.14159
+int main()
+{
+	float inches;
+	printf("What size pie for you mister?");
+	scanf_s("%f", &inches);
+	printf("Your pie is %f square inches of goodness", inches * inches / 2 * PI);
+	getchar();
+	getchar();
+	return 0;
+
+}
