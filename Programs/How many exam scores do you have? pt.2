@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+void calcAvg(int examCount);
+int main()
+{
+	float examCount = 0;
+	printf("How many exam scores do you have?\n");
+	scanf_s("%f", &examCount);
+	calcAvg(examCount);
+	getchar();
+	getchar();
+	return 0;
+}
+
+void calcAvg(int examCount)
+{
+	int count = 0;
+	count = count + examCount;
+	float totalScore = 0, examScore = 0;
+	while (count > 0)
+	{
+		printf("Please enter exam score #%d\n", count);
+		scanf_s("%f", &examScore);
+		totalScore = totalScore + examScore;
+		count = count - 1;	
+	}
+	printf("Thank you\n");
+	float avg = totalScore / examCount;
+	printf("The average of all test scores = %.1f", avg);
+}
