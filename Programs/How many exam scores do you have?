@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	float examCount = 0, totalScore = 0, examScore = 0;
+	printf("How many exam scores do you have?\n");
+	scanf_s("%f", &examCount);
+	int count = 0;
+	count = count + examCount;
+	while (count > 0)
+	{
+		printf("Please enter exam score #%d\n", count);
+		scanf_s("%f", &examScore);
+		totalScore = totalScore + examScore;
+		count = count - 1;
+		//printf("%d,%.1f,%.1f,%.1f,\n", count, examCount, totalScore, examScore);
+	}
+	printf("Thank you\n");
+	float avg = totalScore / examCount;
+	printf("The average of all test scores = %.1f", avg);
+	//printf("this is the end exam count %d,total score %d", examCount, totalScore);
+	getchar();
+	getchar();
+	return 0;
+}
+
+or
+
+
+#include <stdio.h>
+#include <string.h>
+void wLoop(int c, es, ts);
+int main()
+{
+	float examCount = 0, totalScore = 0, examScore = 0;
+	printf("How many exam scores do you have?\n");
+	scanf_s("%f", &examCount);
+	int count = 0;
+	count = count + examCount;
+	wLoop(count, examScore, totalScore);
+	printf("Thank you\n");
+	float avg = totalScore / examCount;
+	printf("The average of all test scores = %.1f", avg);
+	//printf("this is the end exam count %d,total score %d", examCount, totalScore);
+	getchar();
+	getchar();
+	return 0;
+}
+
+void wLoop(int c, es, ts)
+{
+	while (n > 0)
+	{
+		printf("Please enter exam score #%d\n", n);
+		scanf_s("%f", &es);
+		ts = ts + es;
+		n = n - 1;
+		//printf("%d,%.1f,%.1f,%.1f,\n", c, examCount, totalScore, examScore);
+	}
+}
